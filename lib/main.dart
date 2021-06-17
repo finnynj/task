@@ -1,9 +1,12 @@
 import 'package:create_profile_app/Screens/chips_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'Screens/home_page.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

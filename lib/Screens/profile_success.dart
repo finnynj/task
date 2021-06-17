@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class ProfileCreated extends StatelessWidget {
-  const ProfileCreated({key}) : super(key: key);
+  final String userName;
+  const ProfileCreated({key, @required this.userName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,19 +12,16 @@ class ProfileCreated extends StatelessWidget {
       body: Container(
         child: Stack(
           children: [
-            ClipPath(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                color: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 30),
-              ),
+            Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
             ),
             ClipPath(
               clipper: BackgroundCustomClipper(),
               child: Container(
                 height: MediaQuery.of(context).size.height / 2.5,
-                width: MediaQuery.of(context).size.width - 70,
+                width: MediaQuery.of(context).size.width - 50,
                 color: Colors.blueAccent,
                 padding: EdgeInsets.fromLTRB(20, 80, 20, 0),
               ),
@@ -38,12 +36,23 @@ class ProfileCreated extends StatelessWidget {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(
-                        top: 20,
+                        top: 30,
                       ),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            'https://www.woolha.com/media/2020/03/eevee.png'),
-                        radius: 80,
+                      child: Card(
+                        elevation: 5,
+                        shape: CircleBorder(),
+                        clipBehavior: Clip.antiAlias,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: ClipOval(
+                            child: Image.network(
+                                "https://image.flaticon.com/icons/png/512/1160/1160040.png",
+                                width: 80,
+                                fit: BoxFit.fill
+                            ),
+                          ),
+                          radius: 70,
+                        ),
                       ),
                     ),
                     Container(
@@ -55,16 +64,18 @@ class ProfileCreated extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
+                              color: Colors.grey[600]
                             ),
                           ),
                           SizedBox(
                             height: 20,
                           ),
                           Text(
-                            "Nikita Kriplani",
+                            userName,
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.w400,
+                                color: Colors.grey[600]
                             ),
                           )
                         ],
@@ -79,6 +90,14 @@ class ProfileCreated extends StatelessWidget {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.blueAccent,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 7,
+                              offset: Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
                           borderRadius: BorderRadius.circular(32),
                         ),
                         child: Center(
@@ -86,7 +105,7 @@ class ProfileCreated extends StatelessWidget {
                             'Lets get started',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 18,
                             ),
                           ),
                         ),
